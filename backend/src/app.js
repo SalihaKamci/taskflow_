@@ -31,6 +31,9 @@ app.use("/api/projects", projectRoutes);
 const taskRoutes = require("./routes/taskRoute");
 app.use("/api/tasks", taskRoutes);
 
+const dashboardRoutes = require("./routes/dashboardRoute");
+
+app.use("/api/dashboard", dashboardRoutes);
 
 app.get("/health", (req, res) => {
   res.json({ status: "OK", message: "API running" });
