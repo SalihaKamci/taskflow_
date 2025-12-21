@@ -75,10 +75,108 @@ const getAdminDashboardStats = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      message: "Dashboard : data could not get",
+      message: "DashboardAdmin : data could not get",
       error: error.message,
     });
   }
 };
 
-module.exports = { getAdminDashboardStats };
+const getEmployeeDashboardStats = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const endOfToday = new Date();
+    endOfToday.setHours(23, 59, 59, 999);
+
+    const endOfWeek = new Date();
+    endOfWeek.setDate(today.getDate() + 7);
+
+   
+    const totalTasks = await Task.count({
+      where: { assignedUserId: userId },
+    });
+
+    const todayTasks = await Task.count({
+      where: {
+        assignedUserId: userId,
+        dueDate: {
+          [Op.between]: [today, endOfToday],
+        },
+        status: {
+          [Op.not]: "Completed",
+        },
+      },
+    });
+
+    const weeklyTasks = await Task.count({
+      where: {
+        assignedUserId: userId,
+        dueDate: {
+          [Op.between]: [today, endOfWeek],
+        },
+        status: {
+          [Op.not]: "Completed",
+        },
+      },
+    });
+
+    const overdueTasks = await Task.count({
+      where: {
+        assignedUserId: userId,
+        dueDate: {
+          [Op.lt]: today,
+        },
+        status: {
+          [Op.not]: "Completed",
+        },
+      },
+    });
+
+  
+    const pendingTasks = await Task.count({
+      where: {
+        assignedUserId: userId,
+        status: "Pending",
+      },
+    });
+
+    const inProgressTasks = await Task.count({
+      where: {
+        assignedUserId: userId,
+        status: "In Progress",
+      },
+    });
+
+   
+    const projectCount = await Project.count({
+      include: [
+        {
+          association: "Tasks",
+          where: { assignedUserId: userId },
+        },
+      ],
+      distinct: true,
+    });
+
+    res.json({
+      totalTasks,
+      todayTasks,
+      weeklyTasks,
+      overdueTasks,
+      status: {
+        pending: pendingTasks,
+        inProgress: inProgressTasks,
+      },
+      projectCount,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "DashboardEmployee : data could not get",
+      error: error.message,
+    });
+  }
+};
+module.exports = { getAdminDashboardStats , getEmployeeDashboardStats};
