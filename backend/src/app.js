@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-
 const app = express();
  
 app.use(cors());
@@ -10,7 +9,6 @@ const authRoutes= require("./routes/authRoute");
 app.use("/api/auth",authRoutes);
 
 const { protect } = require("./middlewares/authMiddleware");
-
 app.get("/api/test/protected", protect, (req, res) => {
   res.json({
     message: "Protected route test",
@@ -26,6 +24,13 @@ app.get(
   (req, res) => {
     res.json({ message: "Dashboard erişimi başarılı" });
   } );
+
+  const projectRoutes = require("./routes/projectRoute");
+app.use("/api/projects", projectRoutes);
+
+
+
+
 
 app.get("/health", (req, res) => {
   res.json({ status: "OK", message: "API running" });
