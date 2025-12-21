@@ -28,8 +28,8 @@ app.get(
   const projectRoutes = require("./routes/projectRoute");
 app.use("/api/projects", projectRoutes);
 
-
-
+const taskRoutes = require("./routes/taskRoute");
+app.use("/api/tasks", taskRoutes);
 
 
 app.get("/health", (req, res) => {
