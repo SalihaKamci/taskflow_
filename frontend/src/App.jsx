@@ -1,20 +1,26 @@
-
-import './App.css'
-
-function App() {
-
-
-  return (
-  
-      <div>
-       <h1>tailwindcss test</h1>
-      <button class="bg-violet-100 hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300 ...">
-  Save changes
-</button>
-      </div>
-      
-     
-  )
-}
-
-export default App
+import React from 'react';
+import { Tabs } from 'antd';
+const App = () => (
+  <Tabs
+    defaultActiveKey="1"
+    items={[
+      {
+        label: 'Tab 1',
+        key: '1',
+        children: 'Tab 1',
+      },
+      {
+        label: 'Tab 2',
+        key: '2',
+        children: 'Tab 2',
+        disabled: true,
+      },
+      {
+        label: 'Tab 3',
+        key: '3',
+        children: 'Tab 3',
+      },
+    ]}
+  />
+);
+export default App;
