@@ -78,11 +78,12 @@ const updateTaskStatusByEmployee = async (req, res) => {
 
 
 const getAllTasks = async (req, res) => {
-  const { status, priority } = req.query;
+  const { status, priority ,assignedUserId } = req.query;
 
   const where = {};
   if (status) where.status = status;
   if (priority) where.priority = priority;
+  if (assignedUserId) where.assignedUserId = assignedUserId;
 
   const tasks = await Task.findAll({
     where,

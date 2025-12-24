@@ -66,10 +66,12 @@ const changePassword = async (req, res) => {
       return res.status(401).json({ message: "password invalid" });
     }
 
-    user.password = newPassword; 
+  const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(newPassword, salt);
     user.forcePasswordChange = false;
 
     await user.save();
+
 
     const token = jwt.sign(
       {
