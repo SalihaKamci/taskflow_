@@ -5,33 +5,39 @@ import {
   TeamOutlined,
   ProfileOutlined,
 } from "@ant-design/icons";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const AdminSidebar = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
   return (
     <Menu
       theme="dark"
       mode="inline"
-      defaultSelectedKeys={["dashboard"]}
+     selectedKeys={[location.pathname]}
+           onClick={({ key }) => navigate(key)}
+
       items={[
         {
-          key: "dashboard",
-          icon: <DashboardOutlined />,
-          label: "Dashboard",
+        key: "/admin/dashboard",
+      icon: <DashboardOutlined />,
+      label: "Dashboard",
         },
         {
-          key: "projects",
-          icon: <ProjectOutlined />,
-          label: "Projeler",
+         key: "/admin/projects",
+      icon: <ProjectOutlined />,
+      label: "Projeler",
         },
         {
-          key: "employees",
-          icon: <TeamOutlined />,
-          label: "Çalışanlar",
+        
+      key: "/admin/employees",
+      icon: <TeamOutlined />,
+      label: "Çalışanlar",
         },
         {
-          key: "tasks",
-          icon: <ProfileOutlined />,
-          label: "Tasklar",
+        key: "/admin/tasks",
+      icon: <ProfileOutlined />,
+      label: "Tasklar",
         },
       ]}
     />

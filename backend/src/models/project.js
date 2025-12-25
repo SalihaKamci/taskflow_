@@ -36,6 +36,20 @@ const Project = sequelize.define(
       type: DataTypes.ENUM("Active", "Completed", "On Hold"),
       defaultValue: "Active",
     },
+    createdBy: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
+    adminId: {
+  type: DataTypes.INTEGER,
+  allowNull: false,
+}
   },
   {
     tableName: "projects",

@@ -9,7 +9,9 @@ const projectStatusMock = {
   active: 4,
   completed: 2,
   onHold: 1,
-};const Admin = () => {
+};
+
+const Admin = () => {
   const [stats, setStats] = useState(null);
 
   useEffect(() => {
@@ -26,11 +28,13 @@ const projectStatusMock = {
   if (!stats) return <div>Loading...</div>;
 
   return (
-    <AdminLayout>
-      <DashboardHeader adminName="Admin" />
+   <>
+     <DashboardHeader adminName="Admin" />
       <StatsCards stats={stats} />
       <ProjectStatusBar data={projectStatusMock} />
-    </AdminLayout>
+  
+   </>
+     
   );
 };
 

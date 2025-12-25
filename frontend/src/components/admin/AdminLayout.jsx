@@ -1,9 +1,10 @@
 import { Layout } from "antd";
+import { Outlet } from "react-router-dom";
 import AdminSidebar from "./AdminSidebar";
 
 const { Sider, Content } = Layout;
 
-const AdminLayout = ({ children }) => {
+const AdminLayout = () => {
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider width={220} theme="dark">
@@ -14,14 +15,13 @@ const AdminLayout = ({ children }) => {
         <Content
           style={{
             padding: "32px",
-            background: "#1f1f1f", // dark uyum
+            margin: "16px",
+            background: "#1f1f1f",
+            width:"500px",
           }}
         >
-          {/* ⬇️ BU WRAPPER OLMADAN OLMAZ */}
-          <div className="w-full flex justify-center">
-            <div className="w-full max-w-7xl">
-              {children}
-            </div>
+          <div className="w-full max-w-7xl mx-auto">
+            <Outlet />
           </div>
         </Content>
       </Layout>

@@ -9,13 +9,14 @@ const createProject = async (req, res) => {
         .status(400)
         .json({ message: "date discrepancy" });
     }
-
+    const adminId = req.user.id;
     const project = await Project.create({
       name,
       description,
       startDate,
       endDate,
       status,
+      adminId,
     });
 
     res.status(201).json(project);
@@ -28,6 +29,7 @@ const getAllProjects = async (req, res) => {
   try {
     const projects = await Project.findAll({
       order: [["createdAt", "DESC"]],
+      where: { adminId: req.user.id },
     });
     res.json(projects);
   } catch (error) {

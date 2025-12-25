@@ -12,7 +12,9 @@ const getAdminDashboardStats = async (req, res) => {
     const endOfWeek = new Date();
     endOfWeek.setDate(today.getDate() + 7);
 
-    const totalProjects = await Project.count();
+    const totalProjects = await Project.count({
+      where: { createdBy: req.user.id },
+    });
     const totalTasks = await Task.count();
     const totalEmployees = await User.count({
       where: { role: "employee" },
