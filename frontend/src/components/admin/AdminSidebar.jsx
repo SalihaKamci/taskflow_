@@ -28,17 +28,18 @@ const AdminSidebar = () => {
       icon: <ProjectOutlined />,
       label: "Projeler",
         },
+          {
+        key: "/admin/tasks",
+      icon: <ProfileOutlined />,
+      label: "Tasklar",
+        },
         {
         
       key: "/admin/employees",
       icon: <TeamOutlined />,
       label: "Çalışanlar",
         },
-        {
-        key: "/admin/tasks",
-      icon: <ProfileOutlined />,
-      label: "Tasklar",
-        },
+      
       ]}
     />
   );
