@@ -1,26 +1,37 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
+import AdminLayout from "../components/admin/AdminLayout";
+import DashboardHeader from "../components/admin/DashboardHeader";
+import StatsCards from "../components/admin/StatsCards";
+import ProjectStatusBar from "../components/admin/ProjectStatusBar";
 
-const Admin = () => {
-    const [stats, setStats] = useState(null);
+const projectStatusMock = {
+  active: 4,
+  completed: 2,
+  onHold: 1,
+};const Admin = () => {
+  const [stats, setStats] = useState(null);
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        api.get("/dashboard/admin", { headers: { Authorization: `Bearer ${token}` } }
-        ).then((res) => setStats(res.data)
-        ).catch(() => alert("admin fail"));
-    }, []);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
 
-    if (!stats) return <div>Loading...</div>;
+    api
+      .get("/dashboard/admin", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => setStats(res.data))
+      .catch(() => alert("admin fail"));
+  }, []);
 
-    return (
-        <div>
-            <h2>Admin Dashboard</h2>
-            <p>Total Projects: {stats.totals.projects}</p>
-            <p>Total Tasks: {stats.totals.tasks}</p>
-            <p>Total Employees: {stats.totals.employees}</p>
-        </div>
-    );
+  if (!stats) return <div>Loading...</div>;
+
+  return (
+    <AdminLayout>
+      <DashboardHeader adminName="Admin" />
+      <StatsCards stats={stats} />
+      <ProjectStatusBar data={projectStatusMock} />
+    </AdminLayout>
+  );
 };
 
 export default Admin;

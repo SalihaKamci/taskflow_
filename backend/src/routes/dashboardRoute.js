@@ -9,7 +9,7 @@ const {forcePasswordChangeCheck} = require("../middlewares/forcePasswordChange")
 router.get("/admin",
   protect,
   isAdmin,
-  forcePasswordChangeCheck,
+  // forcePasswordChangeCheck,
   getAdminDashboardStats
 );
 router.get(
