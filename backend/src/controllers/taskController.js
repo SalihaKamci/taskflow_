@@ -88,7 +88,7 @@ const getAllTasks = async (req, res) => {
   const tasks = await Task.findAll({
     where,
     include: [
-      { model: Project },
+      { model: Project,  attributes: ['id', 'name']},
       { model: User, as: "assignedUser", attributes: ["id", "fullName"] },
     ],
     order: [["dueDate", "ASC"]],
