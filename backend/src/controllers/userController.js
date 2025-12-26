@@ -27,13 +27,12 @@ const createEmployee = async (req, res) => {
       return res.status(400).json({ message: "Bu email zaten kayıtlı" });
     }
 
-    const defaultPassword = "123456";
-    const hashedPassword = await bcrypt.hash(defaultPassword, 10);
+   
 
     const employee = await User.create({
       fullName,
       email,
-      password: hashedPassword,
+      password:"123456",
       role: "employee",
       forcePasswordChange: true,
     });

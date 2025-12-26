@@ -7,7 +7,7 @@ const login = async (req, res) => {
     console.log("Login api");
     console.log(" Request body:", req.body);
     const { email, password } = req.body;
-  
+  console.log("LOGIN PASSWORD RAW:", `"${password}"`);
     if (!email || !password)
          {
       return res.status(400).json({ message: "email  password required" });
@@ -65,10 +65,9 @@ const changePassword = async (req, res) => {
     if (!isMatch) {
       return res.status(401).json({ message: "password invalid" });
     }
-
-  const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(newPassword, salt);
-    user.forcePasswordChange = false;
+user.password = newPassword;
+user.forcePasswordChange = false;
+await user.save();
 
     await user.save();
 
