@@ -31,6 +31,8 @@ app.use("/api/projects", projectRoutes);
 
 const taskRoutes = require("./routes/taskRoute");
 app.use("/api/tasks", taskRoutes);
+const employeeRoutes = require("./routes/employeeRoute");
+app.use("/api/employees", employeeRoutes);
 
 const dashboardRoutes = require("./routes/dashboardRoute");
 

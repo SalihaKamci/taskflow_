@@ -4,11 +4,7 @@ import Admin from "./pages/Admin";
 import AdminLayout from "./components/admin/AdminLayout";
 import AdminProjects from "./pages/AdminProjects";
 import AdminTasks from "./pages/adminTasks";
-
-
-
-
-
+import AdminEployees from "./pages/adminEmployees"
 
 function App() {
   return (
@@ -23,6 +19,7 @@ function App() {
           <Route path="dashboard" element={<Admin />} />
           <Route path="projects" element={<AdminProjects />} />
           <Route path="tasks" element={<AdminTasks />} />
+          <Route path="employees" element= {<AdminEployees/>} />
        
         
 
