@@ -17,9 +17,11 @@ const createTask = async (req, res) => {
     }
 
     if (
-      new Date(dueDate) < new Date(project.startDate) ||
-      new Date(dueDate) > new Date(project.endDate)
-    ) {
+      new Date(dueDate) <= new Date(project.startDate) ||
+      new Date(dueDate) >= new Date(project.endDate)
+    )
+    
+    {
       return res.status(400).json({
         message: "Task date discrepancy",
       });

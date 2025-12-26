@@ -1,10 +1,12 @@
 import api from "../api/axios";
 import { useEffect, useState } from "react";
-import { Table, Tag } from "antd";
+import { Table, Tag, Button } from "antd";
+import CreateTaskModal from "../components/admin/Task/CreateTaskModal";
 
 const AdminTasks = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
   const statusColorMap = {
     "On Hold": "purple",
     Pending: "lime",
@@ -16,20 +18,19 @@ const AdminTasks = () => {
     Medium: "#e8b339",
     Low: "#a9d134",
   };
-  useEffect(() => {
+
+  const fetchTasks = () => {
     const token = localStorage.getItem("token");
 
-    api
-      .get("/tasks", { headers: { Authorization: `Bearer ${token}` } })
-      .then((res) => {
-        setTasks(res.data);
-      })
-      .catch((err) => {
-        console.log(err + " taskslar getirelemedi");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    setLoading(true);
+    api.get("/tasks", { headers: { Authorization: `Bearer ${token}` }, })
+      .then((res) => setTasks(res.data))
+      .catch(() => console.log("taskslar getirelemedi"))
+      .finally(() => setLoading(false));
+  };
+// eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    fetchTasks();
   }, []);
 
   const columns = [
@@ -52,33 +53,33 @@ const AdminTasks = () => {
     {
       title: "priority",
       dataIndex: "priority",
-      key: "name",
+      key: "priority",
       render: (status) => <Tag color={statusColorMap[status]}>{status}</Tag>,
     },
     {
       title: "dueDate",
       dataIndex: "dueDate",
-      key: "name",
+      key: "dueDate",
     },
     {
       title: "createdAt",
       dataIndex: "title",
-      key: "name",
+      key: "createdAt",
     },
     {
       title: "updatedAt",
       dataIndex: "title",
-      key: "name",
+      key: "updatedAt",
     },
     {
       title: "projectName",
       dataIndex: ["Project", "name"],
-      key: "name",
+      key: "projectName",
     },
     {
       title: "assignedUser",
       dataIndex: ["assignedUser", "fullName"],
-      key: "name",
+      key: "assignedUser",
     },
   ];
 
@@ -86,6 +87,10 @@ const AdminTasks = () => {
     <>
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-semibold mb-6">Tasks</h1>
+        <Button type="primary" onClick={() => setModalOpen(true)}>
+          Yeni Task Ekle
+        </Button>
+
       </div>
 
       <Table
@@ -95,8 +100,18 @@ const AdminTasks = () => {
         loading={loading}
         pagination={{ pageSize: 5 }}
       />
+
+      <CreateTaskModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onCreated={fetchTasks}
+      />
     </>
+
+
   );
+
+
 };
 
 export default AdminTasks;

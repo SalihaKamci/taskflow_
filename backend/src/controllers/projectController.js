@@ -29,7 +29,6 @@ const getAllProjects = async (req, res) => {
   try {
     const projects = await Project.findAll({
       order: [["createdAt", "DESC"]],
-      where: { adminId: req.user.id },
     });
     res.json(projects);
   } catch (error) {

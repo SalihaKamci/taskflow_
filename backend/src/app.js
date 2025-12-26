@@ -24,7 +24,8 @@ app.get(
   (req, res) => {
     res.json({ message: "Dashboard erişimi başarılı" });
   } );
-
+ const userRoutes = require("./routes/userRoute");
+app.use("/api/users", userRoutes);
   const projectRoutes = require("./routes/projectRoute");
 app.use("/api/projects", projectRoutes);
 
