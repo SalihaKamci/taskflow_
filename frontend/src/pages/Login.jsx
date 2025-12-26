@@ -12,8 +12,13 @@ const Login = () => {
 
       localStorage.setItem("token", resAPI.data.token);
       localStorage.setItem("user", JSON.stringify(resAPI.data.user));
-
-      if (resAPI.data.user.role === "admin") {
+  
+       const user = resAPI.data.user;
+        if(user.forcePasswordChange){
+          window.location.href = "/change-password";
+          return;
+        }
+      if (user.role === "admin") {
         window.location.href = "/admin";
       } else {
         window.location.href = "/employee";

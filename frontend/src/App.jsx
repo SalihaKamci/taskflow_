@@ -5,6 +5,7 @@ import AdminLayout from "./components/admin/AdminLayout";
 import AdminProjects from "./pages/AdminProjects";
 import AdminTasks from "./pages/adminTasks";
 import AdminEployees from "./pages/adminEmployees"
+import ForcePasswordChange from "./pages/ForcePasswordChange";
 
 function App() {
   return (
@@ -12,9 +13,9 @@ function App() {
       <Routes>
 
         <Route path="/" element={<Login />} />
-
+  <Route path="/change-password" element={<ForcePasswordChange />} />
         <Route path="/admin" element={<AdminLayout />}>
-
+     
           <Route index element={<Navigate to="dashboard" />} />
           <Route path="dashboard" element={<Admin />} />
           <Route path="projects" element={<AdminProjects />} />
