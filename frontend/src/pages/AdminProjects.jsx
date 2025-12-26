@@ -1,36 +1,34 @@
 import { useEffect, useState } from "react";
-import { Table, Tag } from "antd";
+import { Table, Tag, Button} from "antd";
 import api from "../api/axios";
-import { Button } from "antd";
+import CreateProjectModal from "../components/admin/proje/CreateProjectModal";
+
 const statusColorMap = {
-  Active: "green",
+  Active: "lime",
   Completed: "blue",
-  "On Hold": "orange",
+  "On Hold": "purple",
 };
 
 const AdminProjects = () => {
 
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [open, setOpen] = useState(false);
+ const [modalOpen, setModalOpen] = useState(false);
 
-
-  useEffect(() => {
+ const fetchTasks = () => {
     const token = localStorage.getItem("token");
 
-    api.get("/projects", {
+    setLoading(true);
+     api.get("/projects", {
       headers: { Authorization: `Bearer ${token}` },
     })
-      .then((res) => {
-        setProjects(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-        alert("Projeler yüklenemedi");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+      .then((res) => setProjects(res.data))
+      .catch(() => console.log("projeler getirelemedi"))
+      .finally(() => setLoading(false));
+  };
+// eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    fetchTasks();
   }, []);
 
   const columns = [
@@ -67,7 +65,7 @@ const AdminProjects = () => {
         <h1 className="text-2xl font-semibold mb-6">
           Projeler
         </h1>
-        <Button type="primary" onClick={() => setOpen(true)}>
+        <Button type="primary" onClick={() => setModalOpen(true)}>
           Yeni Proje Ekle
         </Button>
       </div>
@@ -79,7 +77,11 @@ const AdminProjects = () => {
         loading={loading}
         pagination={{ pageSize: 5 }}
       />
-
+<CreateProjectModal
+open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onCreated={fetchTasks}
+/>
 
     </>
   );

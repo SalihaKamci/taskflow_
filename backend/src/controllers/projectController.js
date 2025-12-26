@@ -16,7 +16,8 @@ const createProject = async (req, res) => {
       startDate,
       endDate,
       status,
-      adminId,
+      adminId: req.user.id,
+      createdBy: req.user.id
     });
 
     res.status(201).json(project);
@@ -58,6 +59,7 @@ const updateProject = async (req, res) => {
       startDate,
       endDate,
       status,
+      
     });
 
     res.json(project);

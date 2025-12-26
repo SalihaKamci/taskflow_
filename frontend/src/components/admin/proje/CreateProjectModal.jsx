@@ -1,49 +1,47 @@
 import { Modal, Form, Input, DatePicker, Select } from "antd";
-import api from "../../api/axios";
+ import api from "../../../api/axios"
 
 const CreateProjectModal = ({ open, onClose, onCreated }) => {
-  const [form] = Form.useForm();
 
-  const handleSubmit = async (values) => {
+const handleSubmit = async (values) => {
+
+  try {
+    
+
     const token = localStorage.getItem("token");
 
     const payload = {
       name: values.name,
       description: values.description,
+      status: values.status,
       startDate: values.dates[0].format("YYYY-MM-DD"),
       endDate: values.dates[1].format("YYYY-MM-DD"),
-      status: values.status,
     };
 
-    try {
-      const res = await api.post("/projects", payload, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+    await api.post("/projects", payload, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
-    
-      onCreated(res.data);
+    form.resetFields();
+    onClose();
+    onCreated();
+  } catch (error) {
+    console.log("Task dueDateformat error", error);
+  }
+};
 
-      form.resetFields();
-      onClose();
-    } catch (err) {
-      console.error(err);
-      alert("Proje eklenemedi");
-    }
-  };
-
+  const [form] = Form.useForm();
   return (
-    <Modal
-      title="Yeni Proje Ekle"
-      open={open}
-      onCancel={onClose}
-      onOk={() => form.submit()}
-      okText="Kaydet"
+<Modal
+  title="Yeni Proje Ekle"
+  open={open}
+  onCancel={onClose}
+  onOk={() => form.submit()}
+  destroyOnClose
+     
     >
-      <Form
-        form={form}
-        layout="vertical"
-        onFinish={handleSubmit}
-      >
+      <Form form={form} layout="vertical" onFinish={handleSubmit}>
+      
         <Form.Item
           label="Proje Adı"
           name="name"
