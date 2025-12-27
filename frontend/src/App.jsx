@@ -1,11 +1,12 @@
 import { BrowserRouter, Routes, Route,Navigate } from "react-router-dom";
-import Login from "./pages/Login";
-import Admin from "./pages/Admin";
+import Login from "./pages/login/Login";
+import Admin from "./pages/admin/Admin";
 import AdminLayout from "./components/admin/AdminLayout";
-import AdminProjects from "./pages/AdminProjects";
-import AdminTasks from "./pages/adminTasks";
-import AdminEployees from "./pages/adminEmployees"
-import ForcePasswordChange from "./pages/ForcePasswordChange";
+import AdminProjects from "./pages/admin/AdminProjects";
+import AdminTasks from "./pages/admin/adminTasks";
+import AdminEployees from "./pages/admin/adminEmployees"
+import ForcePasswordChange from "./pages/login/ForcePasswordChange";
+import EmployeeDashboard from "./pages/employee/employeeDashboard";
 
 function App() {
   return (
@@ -13,19 +14,24 @@ function App() {
       <Routes>
 
         <Route path="/" element={<Login />} />
-  <Route path="/change-password" element={<ForcePasswordChange />} />
-        <Route path="/admin" element={<AdminLayout />}>
+      <Route path="/change-password" element={<ForcePasswordChange />} />
      
+        <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Navigate to="dashboard" />} />
           <Route path="dashboard" element={<Admin />} />
           <Route path="projects" element={<AdminProjects />} />
           <Route path="tasks" element={<AdminTasks />} />
           <Route path="employees" element= {<AdminEployees/>} />
-       
-        
-
         </Route>
+   
+       <Route path="/employee" element={<EmployeeDashboard />}>
 
+
+       </Route>
+      
+      
+      
+      
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>

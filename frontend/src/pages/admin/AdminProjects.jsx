@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Table, Tag, Button} from "antd";
-import api from "../api/axios";
-import CreateProjectModal from "../components/admin/proje/CreateProjectModal";
+import api from "../../api/axios";
+import CreateProjectModal from "../../components/admin/proje/CreateProjectModal";
 
 const statusColorMap = {
   Active: "lime",

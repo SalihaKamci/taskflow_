@@ -1,7 +1,7 @@
-import api from "../api/axios";
+import api from "../../api/axios";
 import { useEffect, useState } from "react";
 import { Table, Tag, Button } from "antd";
-import CreateTaskModal from "../components/admin/Task/CreateTaskModal";
+import CreateTaskModal from "../../components/admin/Task/CreateTaskModal";
 
 const AdminTasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -35,49 +35,40 @@ const AdminTasks = () => {
 
   const columns = [
     {
-      title: "TAKS NAME",
+      title: "Task Adı",
       dataIndex: "title",
       key: "title",
     },
     {
-      title: "description",
+      title: "Açıklama",
       dataIndex: "description",
       key: "description",
     },
     {
-      title: "status",
+      title: "Status",
       dataIndex: "status",
       key: "status",
       render: (status) => <Tag color={statusColorMap[status]}>{status}</Tag>,
     },
     {
-      title: "priority",
+      title: "Priority",
       dataIndex: "priority",
       key: "priority",
       render: (status) => <Tag color={statusColorMap[status]}>{status}</Tag>,
     },
     {
-      title: "dueDate",
+      title: "Bitiş Tarihi",
       dataIndex: "dueDate",
       key: "dueDate",
     },
+   
     {
-      title: "createdAt",
-      dataIndex: "title",
-      key: "createdAt",
-    },
-    {
-      title: "updatedAt",
-      dataIndex: "title",
-      key: "updatedAt",
-    },
-    {
-      title: "projectName",
+      title: "Proje Adı",
       dataIndex: ["Project", "name"],
       key: "projectName",
     },
     {
-      title: "assignedUser",
+      title: "Atanan User",
       dataIndex: ["assignedUser", "fullName"],
       key: "assignedUser",
     },

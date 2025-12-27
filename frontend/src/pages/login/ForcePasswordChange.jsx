@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Modal, Form, Input, message } from "antd";
-import api from "../api/axios";
+import api from "../../api/axios";
 
 const ForcePasswordChange = () => {
   const [loading, setLoading] = useState(false);

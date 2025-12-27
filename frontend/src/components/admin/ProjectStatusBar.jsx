@@ -1,10 +1,10 @@
 const ProjectStatusBar = ({ data }) => {
-  const maxValue = Math.max(...Object.values(data));
+const maxValue = Math.max(...Object.values(data), 1);
 
   return (
   <div className="bg-[#141414] text-white rounded-lg p-6 shadow-sm mt-8">
       <h3 className="text-lg font-semibold mb-6">
-        Proje Durumları
+        Task Durumları
       </h3>
 
       <div className="space-y-4">

@@ -1,7 +1,7 @@
 import { useEffect, useState ,useCallback } from "react";
 import { Table, Button } from "antd";
-import api from "../api/axios";
-import CreateEmployessModal from "../components/admin/employees/createEmployessModal";
+import api from "../../api/axios";
+import CreateEmployessModal from "../../components/employees/createEmployessModal";
 
 
 

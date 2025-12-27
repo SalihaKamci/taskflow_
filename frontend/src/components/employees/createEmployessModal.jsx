@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import { Modal, Form, Input } from "antd";
-import api from "../../../api/axios";
+import api from "../../api/axios";
 
 
 const CreateEmployessModal = ({ open, onClose, onCreated }) => {
