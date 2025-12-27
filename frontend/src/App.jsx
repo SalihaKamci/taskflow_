@@ -7,6 +7,9 @@ import AdminTasks from "./pages/admin/adminTasks";
 import AdminEployees from "./pages/admin/adminEmployees"
 import ForcePasswordChange from "./pages/login/ForcePasswordChange";
 import EmployeeDashboard from "./pages/employee/employeeDashboard";
+import EmployeeLayout from "./components/employees/employeLayout";
+import EmployeeTask from "./pages/employee/employeeTask";
+
 
 function App() {
   return (
@@ -23,11 +26,16 @@ function App() {
           <Route path="tasks" element={<AdminTasks />} />
           <Route path="employees" element= {<AdminEployees/>} />
         </Route>
-   
-       <Route path="/employee" element={<EmployeeDashboard />}>
 
 
-       </Route>
+     <Route path="/employee" element={<EmployeeLayout />}>
+       <Route index element={<Navigate to="dashboard" />} />
+  <Route path="dashboard" element={<EmployeeDashboard />} />
+  <Route path="tasks" element={<EmployeeTask />} />
+       
+</Route>
+
+  
       
       
       
