@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Table, Tag, Button} from "antd";
+import { Table, Tag, Button,Card} from "antd";
 import api from "../../api/axios";
 import CreateProjectModal from "../../components/admin/proje/CreateProjectModal";
 
@@ -60,30 +60,49 @@ const AdminProjects = () => {
   ];
 
   return (
-    <>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-semibold mb-6">
-          Projeler
-        </h1>
-        <Button type="primary" onClick={() => setModalOpen(true)}>
-          Yeni Proje Ekle
-        </Button>
+ 
+      <div  className="space-y-6">
+         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+         <div>
+          <h1 className="text-2xl font-semibold text-white">Projeler</h1>
+          <p className="text-gray-400">Tüm projeleri görüntüleyin ve yönetin</p>
+        </div>
+          <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+                <Button 
+            type="primary" 
+            onClick={() => setModalOpen(true)}
+            className="bg-green-600 hover:bg-green-700"
+          >
+            Yeni Proje Ekle
+          </Button>
+        </div>
       </div>
-
+       
+        <Card className="bg-gray-800 border-gray-700 shadow-lg">
+       
       <Table
         rowKey="id"
         columns={columns}
         dataSource={projects}
         loading={loading}
-        pagination={{ pageSize: 5 }}
+        pagination={{  pageSize: 7,
+            className: "bg-gray-800 text-white",
+        
+            showTotal: (total) => `Toplam ${total} proje`}}
+              className="bg-transparent"
+          rowClassName="bg-gray-800 hover:bg-gray-700 text-white"
+          scroll={{ x: 800 }}
       />
+        </Card>
+    
+
 <CreateProjectModal
 open={modalOpen}
         onClose={() => setModalOpen(false)}
         onCreated={fetchTasks}
 />
 
-    </>
+      </div>
   );
 };
 

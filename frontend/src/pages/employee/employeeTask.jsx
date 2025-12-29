@@ -1,6 +1,6 @@
 import api from "../../api/axios";
 import { useEffect, useState } from "react";
-import { Table, Tag, Button } from "antd";
+import { Table, Tag, Button,Card } from "antd";
 import UpdateTaskModal from "../../components/employees/UpdateTaskModal";
 
 const EmployeeTask = () => {
@@ -78,7 +78,9 @@ const EmployeeTask = () => {
       key: "actions",
       render: (_, record) => (
         <Button
-          type="link"
+            type="primary"
+          size="small"
+          className="bg-blue-600 hover:bg-blue-700"
           onClick={() => {
             setSelectedTask(record);
             setModalOpen(true);
@@ -91,19 +93,31 @@ const EmployeeTask = () => {
   ];
 
   return (
-    <>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-semibold mb-6">Tasks</h1>
-
+   <div className="space-y-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+        <h1 className="text-2xl font-semibold text-white mb-4 sm:mb-0">
+          Görevlerim
+        </h1>
       </div>
 
-      <Table
-        rowKey="id"
-        columns={columns}
-        dataSource={tasks}
-        loading={loading}
-        pagination={{ pageSize: 5 }}
-      />
+      <Card className="bg-gray-800 border-gray-700 shadow-lg">
+        <div className="overflow-x-auto">
+          <Table
+            rowKey="id"
+            columns={columns}
+            dataSource={tasks}
+            loading={loading}
+            pagination={{ 
+              pageSize:7 ,
+              className: "bg-gray-800 text-white",
+          
+            }}
+            className="bg-transparent"
+            rowClassName="bg-gray-800 hover:bg-gray-700 text-white"
+            scroll={{ x: 800 }}
+          />
+        </div>
+      </Card>
 
       <UpdateTaskModal
         open={modalOpen}
@@ -114,12 +128,10 @@ const EmployeeTask = () => {
         }}
         onUpdated={fetchTasks}
       />
-    </>
-
-
+    </div>
   );
-
-
 };
+
+  
 
 export default EmployeeTask;

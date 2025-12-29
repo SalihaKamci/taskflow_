@@ -11,37 +11,68 @@ const AdminSidebar = () => {
     const navigate = useNavigate();
     const location = useLocation();
   return (
-    <Menu
-      theme="dark"
-      mode="inline"
-     selectedKeys={[location.pathname]}
-           onClick={({ key }) => navigate(key)}
-
-      items={[
-        {
-        key: "/admin/dashboard",
-      icon: <DashboardOutlined />,
-      label: "Dashboard",
-        },
-        {
-         key: "/admin/projects",
-      icon: <ProjectOutlined />,
-      label: "Projeler",
-        },
+     <div className="pt-5">
+     
+     <div className="px-4 py-4 mb-4 border-b border-gray-700">
+        <h2 className="text-white text-lg font-semibold text-center">
+          Admin Paneli
+        </h2>
+      </div>
+     
+      <Menu
+        theme="dark"
+        mode="inline"
+        selectedKeys={[location.pathname]}
+        onClick={({ key }) => navigate(key)}
+        className="bg-transparent border-r-0"
+        items={[
           {
-        key: "/admin/tasks",
-      icon: <ProfileOutlined />,
-      label: "Tasklar",
-        },
-        {
-        
-      key: "/admin/employees",
-      icon: <TeamOutlined />,
-      label: "Çalışanlar",
-        },
-      
-      ]}
-    />
+            key: "/admin/dashboard",
+            icon: <DashboardOutlined className="text-blue-400" />,
+            label: (
+              <span className="text-gray-200 hover:text-white transition-colors">
+                Dashboard
+              </span>
+            ),
+            className: "hover:bg-gray-700 rounded-lg mx-2 mb-1"
+          },
+          {
+            key: "/admin/projects",
+            icon: <ProjectOutlined className="text-green-400" />,
+            label: (
+              <span className="text-gray-200 hover:text-white transition-colors">
+                Projeler
+              </span>
+            ),
+            className: "hover:bg-gray-700 rounded-lg mx-2 mb-1"
+          },
+          {
+            key: "/admin/tasks",
+            icon: <ProfileOutlined className="text-purple-400" />,
+            label: (
+              <span className="text-gray-200 hover:text-white transition-colors">
+                Tasklar
+              </span>
+            ),
+            className: "hover:bg-gray-700 rounded-lg mx-2 mb-1"
+          },
+          {
+            key: "/admin/employees",
+            icon: <TeamOutlined className="text-yellow-400" />,
+            label: (
+              <span className="text-gray-200 hover:text-white transition-colors">
+                Çalışanlar
+              </span>
+            ),
+            className: "hover:bg-gray-700 rounded-lg mx-2"
+          },
+        ]}
+      />
+    
+     </div>
+   
+   
+   
   );
 };
 

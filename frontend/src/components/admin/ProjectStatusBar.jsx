@@ -1,30 +1,41 @@
+import { Card, Typography } from "antd";
+
+const { Title } = Typography;
 const ProjectStatusBar = ({ data }) => {
+  const statusLabels = {
+    today: "Bugünkü Tasklar",
+    weekly: "Bu Haftanın Taskları",
+    overdue: "Gecikmiş Tasklar",
+    pending: "Bekleyen Tasklar",
+    onHold: "Askıdaki Tasklar",
+  };
 const maxValue = Math.max(...Object.values(data), 1);
 
   return (
-  <div className="bg-[#141414] text-white rounded-lg p-6 shadow-sm mt-8">
-      <h3 className="text-lg font-semibold mb-6">
+  <Card className="bg-gray-800 border-gray-700 shadow-lg">
+      <Title level={4} className="!text-white !mb-6">
         Task Durumları
-      </h3>
+      </Title>
 
       <div className="space-y-4">
-        {Object.entries(data).map(([status, value]) => {
+        {Object.entries(data).map(([key, value]) => {
           const width = (value / maxValue) * 100;
+          const label = statusLabels[key] || key;
 
           return (
-            <div key={status}>
+            <div key={key}>
               <div className="flex justify-between mb-1">
-                <span className="capitalize text-sm text-gray-600">
-                  {status}
+                <span className="text-sm text-gray-300 capitalize">
+                  {label}
                 </span>
-                <span className="text-sm font-medium">
+                <span className="text-sm font-medium text-white">
                   {value}
                 </span>
               </div>
 
-              <div className="w-full bg-gray-200 rounded-full h-3">
+              <div className="w-full bg-gray-700 rounded-full h-2">
                 <div
-                  className="h-3 rounded-full bg-blue-600 transition-all"
+                  className="h-2 rounded-full bg-blue-500 transition-all duration-500"
                   style={{ width: `${width}%` }}
                 />
               </div>
@@ -32,7 +43,7 @@ const maxValue = Math.max(...Object.values(data), 1);
           );
         })}
       </div>
-    </div>
+    </Card>
   );
 };
 

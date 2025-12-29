@@ -34,12 +34,13 @@ const Admin = () => {
   if (!stats || !taskStatusData) return <div>Loading...</div>;
 
   return (
-   <>
-     <DashboardHeader adminName="Admin-1" />
+     <div className="space-y-6">
+    <DashboardHeader adminName="Admin" />
       <StatsCards stats={stats} />
       <ProjectStatusBar data={taskStatusData} />
-  
-   </>
+     </div>
+     
+ 
      
   );
 };

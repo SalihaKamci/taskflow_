@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import api from "../../api/axios"
 import TaskStatusBar from "../../components/employees/taskStatusBar";
 import TaskStatusCards from "../../components/employees/TaskStatusCards";
+import { Card, Row, Col, Typography } from "antd";
 
-
+const { Title } = Typography;
 
 const EmployeeDashboard = () => {
   const [stats, setStats] = useState(null);
@@ -17,11 +18,11 @@ const EmployeeDashboard = () => {
       });
 
       setStats({
-        "": res.data.overdueTasks,
-        projectCount: res.data.projectCount,
-        "today Tasks": res.data.todayTasks,
-        totalTasks: res.data.totalTasks,
-        weeklyTasks: res.data.weeklyTasks,
+        "Gecikmiş Görevler": res.data.overdueTasks,
+        "Toplam Proje": res.data.projectCount,
+        "Toplam görevler": res.data.totalTasks,
+        "Bugün Tamamlanacaklar": res.data.todayTasks,
+        "Bu Hafta Tamamlanacaklar": res.data.weeklyTasks,
       });
 
       setTaskStatusCounts({
@@ -49,13 +50,32 @@ const EmployeeDashboard = () => {
   if (!stats) return <div>Loading...</div>;
 
   return (
-    <><div style={{ padding: 32 }}>
-      <h3>Hoş geldin, <strong>{user?.fullName}</strong></h3>
+    <div className="space-y-6">
+      <Card className="bg-gray-800 border-gray-700 shadow-lg">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
+          <div>
+            <Title level={3} className="!text-white !mb-2">
+              Hoş geldin, <strong className="text-blue-400">{user?.fullName}</strong>
+            </Title>
+            <p className="text-gray-400">Görev durumlarını aşağıdan takip edebilirsin</p>
+
+          </div>
+
+
+        </div>
+
+      </Card>
+
+      <div className="bg-gray-800 rounded-lg p-4 shadow-lg">
+        <TaskStatusBar data={taskStatusCounts} />
+      </div>
+      <div className="bg-gray-800 rounded-lg p-4 shadow-lg">
+        <TaskStatusCards data={stats} />
+      </div>
     </div>
-     
-      <TaskStatusBar data={taskStatusCounts} />
-      <TaskStatusCards data={stats} />
-    </>
+
+
+
 
   );
 };

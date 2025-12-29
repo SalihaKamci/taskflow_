@@ -5,21 +5,25 @@ const { Sider, Content } = Layout;
 
 const EmployeeLayout = () => {
   return (
-    <Layout style={{ minHeight: "100vh" }}>
-    
-      <Sider width={220}>  <EmployeeSidebar /> </Sider>
+    <Layout className="min-h-screen bg-gray-900">
+      <Sider
+        width={220}
+        className="!fixed !left-0 !top-0 !bottom-0 h-screen overflow-auto bg-gray-800"
+        breakpoint="lg"
+        collapsedWidth="0"
+      >
+        <div className="pt-5">
+          <EmployeeSidebar />
+        </div>
+      </Sider>
 
-      <Layout>
-        <Content
-          style={{
-            padding: "32px",
-            margin: "16px",
-            background: "#1f1f1f",
-            width: "500px",
-          }}
-        >
+      <Layout className="ml-0 lg:ml-220 min-h-screen transition-all duration-300">
+        <Content  className="p-4 md:p-8 min-h-screen bg-gray-900">
           <div className="w-full max-w-7xl mx-auto">
-            <Outlet />
+            <div className="bg-gray-800 rounded-lg shadow-lg p-4 md:p-6">
+               <Outlet />
+            </div>
+           
           </div>
         </Content>
       </Layout>

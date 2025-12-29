@@ -1,10 +1,12 @@
 const TaskStatusBar = ({ data }) => {
 const maxValue = Math.max(...Object.values(data), 1);
 
+
   return (
+    
   <div className="bg-[#141414] text-white rounded-lg p-6 shadow-sm mt-8">
       <h3 className="text-lg font-semibold mb-6">
-        Task Durumları
+        Genel Istatistikler
       </h3>
 
       <div className="space-y-4">
