@@ -2,60 +2,80 @@ import { Menu } from "antd";
 import {
   DashboardOutlined,
   ProfileOutlined,
+  LogoutOutlined
 } from "@ant-design/icons";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const EmployeeSidebar = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
- 
-    return (
-    <div className="pt-5">
+  const navigate = useNavigate();
+  const location = useLocation();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
 
+  return (
+    <div className="pt-5">
       <div className="px-4 py-4 mb-4 border-b border-gray-700">
- <h2 className="text-white text-lg font-semibold text-center">
+        <h2 className="text-white text-lg font-semibold text-center">
           Çalışan Paneli
         </h2>
       </div>
-    
-    
- 
+
+
       <Menu
-      theme="dark"
-      mode="inline"
-     selectedKeys={[location.pathname]}
-           onClick={({ key }) => navigate(key)}
-  className="bg-transparent border-r-0"
-      items={[
-        {
-        key: "/employee/dashboard",
-      icon: <DashboardOutlined />,
-      label:(   <span className="text-gray-200 hover:text-white transition-colors">
-                Dashboard
-              </span>),
-               className: "hover:bg-gray-700 rounded-lg mx-2 mb-1"
-        },
-     
+        theme="dark"
+        mode="inline"
+        selectedKeys={[location.pathname]}
+      className="bg-transparent border-r-0 flex-1"
+         onClick={({ key }) => {
+          if (key === "logout") {
+            handleLogout();
+          } else {
+            navigate(key);
+          }
+        }}
+        items={[
           {
-        key: "/employee/tasks",
-      icon: <ProfileOutlined />,
-       label: (
+            key: "/employee/dashboard",
+            icon: <DashboardOutlined />,
+            label: (<span className="text-gray-200 hover:text-white transition-colors">
+              Dashboard
+            </span>),
+            className: "hover:bg-gray-700 rounded-lg mx-2 mb-1"
+          },
+
+          {
+            key: "/employee/tasks",
+            icon: <ProfileOutlined />,
+            label: (
               <span className="text-gray-200 hover:text-white transition-colors">
                 Tasklar
               </span>
             ),
             className: "hover:bg-gray-700 rounded-lg mx-2"
-        },
-      
-      
-      ]}
-    />
+          },
+ {
+            key: "logout",
+            icon: <LogoutOutlined className="text-red-400" />,
+            label: (
+              <span className="text-red-400 hover:text-red-300">
+                Çıkış Yap
+              </span>
+            ),
+            className:
+              "hover:bg-red-500/10 rounded-lg mx-2 mt-6 border-t border-gray-700",
+          },
+
+        ]}
+      />
     </div>
- 
- 
- 
- 
- 
+
+
+
+
+
   );
 };
 
