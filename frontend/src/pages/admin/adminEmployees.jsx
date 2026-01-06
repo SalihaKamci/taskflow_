@@ -64,12 +64,7 @@ const AdminEployees =()=>{
           <p className="text-gray-400">Toplam Çalışan</p>
           <p className="text-3xl font-semibold text-white">{employees.length}</p>
         </Card>
- <Card className="bg-gray-800 border-gray-700">
-          <p className="text-gray-400">Aktif Çalışan</p>
-          <p className="text-3xl font-semibold text-green-400">
-            {employees.filter(e => e.isActive).length}
-          </p>
-        </Card>
+
   </div>
        <Card className="bg-gray-800 border-gray-700 shadow-lg">
      

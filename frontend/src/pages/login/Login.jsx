@@ -19,7 +19,7 @@ const { TabPane } = Tabs;
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [ setError] = useState("");
+  const [setError] = useState("");
 
   const handleLogin = async () => {
     try {
@@ -45,21 +45,21 @@ const Login = () => {
   };
 
   return (
-<div className="min-h-screen bg-slate-500 flex flex-col md:flex-row">
-    
+    <div className="min-h-screen bg-slate-500 flex flex-col md:flex-row">
+
       <div className="md:w-1/2 bg-gradient-to-br from-slate-800 to-slate-500 p-8 md:p-12 flex flex-col justify-center text-white">
         <div className="max-w-md mx-auto">
           <div className="flex items-center gap-3 mb-6">
             <div className="p-3 bg-white bg-opacity-20 rounded-lg">
               <DashboardOutlined className="text-2xl" />
             </div>
-            <Title  className="!text-white !mb-0">
+            <Title className="!text-white !mb-0">
               TaskFlow
             </Title>
           </div>
         </div>
       </div>
-      
+
       <div className="md:w-1/2 p-8 md:p-12 flex items-center justify-center">
         <div className="w-full max-w-md">
           <Card className="bg-slate-400 border-gray-700 shadow-xl">
@@ -76,6 +76,8 @@ const Login = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="bg-gray-700 border-gray-600 text-white"
+
+                      style={{ color: 'black' }}
                     />
                   </Form.Item>
 
@@ -89,6 +91,7 @@ const Login = () => {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       className="bg-gray-700 border-gray-600 text-white"
+                      style={{ color: 'black' }}
                     />
                   </Form.Item>
 
@@ -111,7 +114,7 @@ const Login = () => {
     </div>
 
 
-    
+
   );
 };
 
